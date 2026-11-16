@@ -1,59 +1,76 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://katticat.github.io/eopac/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Tonies – KÖB Obernau</title>
+
   <link rel="stylesheet"
- href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <main>
     <header>
-      <h1 id="seitentitel">Neuerscheinungen</h1>
+      <h1>Unsere Tonies</h1>
     </header>
 
-    <p id="status">Neuerscheinungen werden geladen …</p>
-    <ul id="medienliste" aria-live="polite"></ul>
+    <div id="eopac-ecjajem">
+      <p>Die Tonies werden geladen …</p>
+    </div>
   </main>
-<html>
-<div style="" id="eopac-ecjajem"> Stöbern Sie in einer unserer Medienlisten: <a href="http://www.eopac.net/BGX429094/medialist/tonies/">Tonies</a>. </div>
-<script type="text/javascript">
 
-var ecjajem;
-(function(d, t) {
-  var s = d.createElement(t), 
-  options = {
-    'bibid':'BGX429094',
-    'formHash': 'ecjajem',
-    'async':true,
-    'feature':'medialist',
-    'alias':'tonies',
-    'format':'',
-    'cover':true,
-    'actions':true,
-    'styles':false,
-    'rak':true,
-    'heading':'h3',
-  };
-  var done = false;
-  s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.eopac.net/static/js/embed_inline-min.js';
-  s.onload = s.onreadystatechange = function() {
-    if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-      done = true;
-      try { 
-        ecjajem = new BVSeOPACinline();
-        ecjajem.initialize(options);
-        ecjajem.inject(); 
-      } catch (e) {}
-    };
-  };
-  var scr = d.getElementsByTagName(t)[0], 
-  par = scr.parentNode; 
-  par.insertBefore(s, scr);
-  }
-)
-(document, 'script');
-</script>
-</html>
+  <script>
+    var ecjajem;
+
+    (function(d, t) {
+      var s = d.createElement(t);
+
+      var options = {
+        bibid: 'BGX429094',
+        formHash: 'ecjajem',
+        async: true,
+        feature: 'medialist',
+        alias: 'tonies',
+        format: '',
+        cover: true,
+        actions: true,
+        styles: false,
+        rak: true,
+        heading: 'h3'
+      };
+
+      var done = false;
+
+      s.src =
+        'https://www.eopac.net/static/js/embed_inline-min.js';
+
+      s.onload = s.onreadystatechange = function() {
+        if (!done &&
+            (!this.readyState ||
+             this.readyState === 'loaded' ||
+             this.readyState === 'complete')) {
+          done = true;
+
+          try {
+            ecjajem = new BVSeOPACinline();
+            ecjajem.initialize(options);
+            ecjajem.inject();
+          } catch (e) {
+            console.error("eOPAC-Fehler:", e);
+          }
+        }
+      };
+
+      var scr = d.getElementsByTagName(t)[0];
+      scr.parentNode.insertBefore(s, scr);
+
+    })(document, 'script');
+  </script>
 </body>
+</html>

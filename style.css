@@ -1,164 +1,134 @@
 
 /* =========================================
-   eOPAC Medienliste – KÖB Obernau
+   Tonies – eOPAC Listenansicht
    ========================================= */
 
 #eopac-ecjajem {
+  width: 100%;
+  max-width: 100%;
   font-family: Oswald, sans-serif;
   color: var(--text);
-  font-size: 1rem;
-  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-/* Gesamtliste */
-#eopac-ecjajem .eopac-embedded-listing {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Einzelnes Medium */
-#eopac-ecjajem .eopac-embedded-listing-element {
+/* Einzelne Medien */
+#eopac-ecjajem
+.eopac-embedded-listing-element {
   display: flow-root;
+  clear: both;
+  width: 100%;
   padding: 1.2rem 0;
   margin: 0;
-  background: transparent;
   border: 0;
   border-bottom: 1px solid var(--border);
-  border-radius: 0;
   box-shadow: none;
-}
-
-/* Coverbereich */
-#eopac-ecjajem
-.eopac-embedded-listing-element-cover {
-  float: left;
-  width: 90px;
-  margin: 0 1.25rem 0 0;
-}
-
-/* Coverbilder */
-#eopac-ecjajem
-.eopac-embedded-listing-element img {
-  max-width: 90px;
-  height: auto;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  background: var(--soft);
+  background: transparent;
 }
 
 /* Titel */
 #eopac-ecjajem
 .eopac-embedded-listing-element h3 {
-  margin: 0 0 0.45rem;
-  padding: 0;
   font-size: 1.05rem;
   font-weight: 600;
+  margin: 0 0 0.45rem;
   line-height: 1.4;
+}
+
+#eopac-ecjajem
+.eopac-embedded-listing-element h3 a,
+#eopac-ecjajem
+.eopac-embedded-listing-element a {
   color: var(--accent);
 }
 
 #eopac-ecjajem
 .eopac-embedded-listing-element h3 a {
-  color: var(--accent);
   text-decoration: none;
 }
 
 #eopac-ecjajem
-.eopac-embedded-listing-element h3 a:hover {
+.eopac-embedded-listing-element a:hover {
   color: var(--accent-dark);
   text-decoration: underline;
 }
 
-/* Medieninformationen */
+/* Cover */
+#eopac-ecjajem
+.eopac-embedded-listing-element img {
+  max-width: 90px;
+  height: auto;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+}
+
+/* Medienbeschreibung */
 #eopac-ecjajem
 .eopac-embedded-listing-element-content {
   color: var(--muted);
   font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 #eopac-ecjajem
-.eopac-embedded-listing-element p {
+.eopac-embedded-listing-element-content p {
   margin: 0.2rem 0;
 }
 
-/* Verfügbarkeitstext */
+/* Verfügbarkeitsanzeige */
 #eopac-ecjajem
 .eopac-embedded-listing-element-statustext {
   color: var(--muted);
   font-size: 0.9rem;
-  margin-top: 0.35rem;
 }
 
-/* Kataloglink mit Ampelpunkt */
+/* Statuspunkt und Link */
 #eopac-ecjajem
 .eopac-embedded-listing-element-actions {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 0.65rem;
-  flex-wrap: wrap;
 }
 
-/* Statuspunkt */
+/* eOPAC Ampel */
 #eopac-ecjajem .eopac-embedded--status {
   display: inline-block;
+  flex: 0 0 10px;
   width: 10px;
   height: 10px;
-  min-width: 10px;
   border-radius: 50%;
-  padding: 0;
-  margin: 0;
   font-size: 0;
   background: #999;
 }
 
-/* Verfügbar */
 #eopac-ecjajem
 .eopac-embedded--status-green {
   background: #299447;
 }
 
-/* Nicht verfügbar */
 #eopac-ecjajem
 .eopac-embedded--status-red {
   background: #cf3838;
 }
 
-/* Weitere Statusfarben */
 #eopac-ecjajem
 .eopac-embedded--status-yellow {
   background: #d99a22;
 }
 
-/* Link */
-#eopac-ecjajem
-.eopac-embedded--action {
+/* Kataloglink */
+#eopac-ecjajem .eopac-embedded--action {
   color: var(--accent);
   font-size: 0.92rem;
-  font-weight: 400;
   text-decoration: underline;
 }
 
-#eopac-ecjajem
-.eopac-embedded--action:hover {
-  color: var(--accent-dark);
-}
-
-/* =========================================
-   Smartphone
-   ========================================= */
-
+/* Smartphone */
 @media (max-width: 560px) {
   #eopac-ecjajem
   .eopac-embedded-listing-element {
     padding: 1rem 0;
-  }
-
-  #eopac-ecjajem
-  .eopac-embedded-listing-element-cover {
-    width: 70px;
-    margin-right: 1rem;
   }
 
   #eopac-ecjajem
@@ -169,10 +139,5 @@
   #eopac-ecjajem
   .eopac-embedded-listing-element h3 {
     font-size: 1rem;
-  }
-
-  #eopac-ecjajem
-  .eopac-embedded-listing-element-content {
-    font-size: 0.9rem;
   }
 }
