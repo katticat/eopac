@@ -35,3 +35,24 @@
 .eopac-link:hover {
   color: var(--accent-dark);
 }
+/* Entliehen */
+.eopac-embedded--status-red {
+  background-color: #cf3838;
+}
+
+/* Sonstiger Status */
+.eopac-embedded--status-yellow {
+  background-color: #d99a22;
+}
+
+/* Link zum Katalog */
+.eopac-embedded--action {
+  color: var(--accent);
+  font-family: Oswald, sans-serif;
+  font-size: 0.92rem;
+  text-decoration: underline;
+}
+
+.eopac-embedded--action:hover {
+  color: var(--accent-dark);
+}
