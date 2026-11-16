@@ -1,30 +1,22 @@
-/* Allgemeine Darstellung */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #333333;
+
+/* Verfügbarkeitsanzeige vor dem Kataloglink */
+.eopac-link::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: #999999;
 }
 
-/* Bereich der eOPAC-Medienliste */
-#eopac-ecjajem {
-    max-width: 1100px;
-    margin: 20px auto;
-    font-size: 16px;
+/* Medium verfügbar */
+.eopac-link.verfuegbar::before {
+  background: #299447;
 }
 
-/* Buchcover */
-#eopac-ecjajem img {
-    max-width: 130px;
-    height: auto;
-    border-radius: 6px;
-}
-
-/* Links */
-#eopac-ecjajem a {
-    color: #287b70;
-    text-decoration: none;
-}
-
-#eopac-ecjajem a:hover {
-    text-decoration: underline;
+/* Medium nicht verfügbar */
+.eopac-link.nicht-verfuegbar::before {
+  background: #cf3838;
 }
