@@ -6,7 +6,7 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>Tonies – KÖB Obernau</title>
+  <title>Unsere Tonies – KÖB Obernau</title>
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
@@ -26,35 +26,150 @@
   </main>
 
   <script>
+    const container =
+      document.getElementById("eopac-ecjajem");
+
+    function formatMedium(element) {
+      if (element.dataset.compact === "true") return;
+
+      // Originaldaten des eOPAC auslesen
+      const titleLink = element.querySelector("h3 a");
+      const image = element.querySelector("img");
+      const action = element.querySelector(
+        ".eopac-embedded--action"
+      );
+      const status = element.querySelector(
+        ".eopac-embedded--status"
+      );
+
+      if (!titleLink || !action) return;
+
+      const originalText = element.textContent || "";
+      const ageMatch = originalText.match(
+        /(?:ab\s+)(\d+)\s+Jahren?/i
+      );
+
+      // Neue kompakte Medienzeile
+      const card = document.createElement("div");
+      card.className = "tonie-card";
+
+      // Cover
+      const cover = document.createElement("div");
+      cover.className = "tonie-cover";
+
+      if (image) {
+        const img = image.cloneNode(true);
+        img.removeAttribute("style");
+        img.loading = "lazy";
+        img.alt = titleLink.textContent.trim();
+
+        const coverLink = document.createElement("a");
+        coverLink.href = titleLink.href;
+        coverLink.appendChild(img);
+        cover.appendChild(coverLink);
+      }
+
+      // Informationen
+      const info = document.createElement("div");
+      info.className = "tonie-info";
+
+      const title = document.createElement("a");
+      title.className = "tonie-title";
+      title.href = titleLink.href;
+      title.textContent = titleLink.textContent.trim();
+
+      const type = document.createElement("div");
+      type.className = "tonie-meta";
+      type.textContent = "Tonie – Hörfigur";
+
+      info.append(title, type);
+
+      if (ageMatch) {
+        const age = document.createElement("div");
+        age.className = "tonie-meta";
+        age.textContent = "Ab " + ageMatch[1] + " Jahren";
+        info.appendChild(age);
+      }
+
+      // Verfügbarkeit und Kataloglink
+      const actions = document.createElement("div");
+      actions.className = "tonie-actions";
+
+      const dot = document.createElement("span");
+      dot.className = "tonie-dot";
+
+      if (status) {
+        if (status.classList.contains(
+          "eopac-embedded--status-green")) {
+          dot.classList.add("available");
+        } else if (status.classList.contains(
+          "eopac-embedded--status-red")) {
+          dot.classList.add("unavailable");
+        } else if (status.classList.contains(
+          "eopac-embedded--status-yellow")) {
+          dot.classList.add("other");
+        }
+        dot.title = status.title || "Status unbekannt";
+      } else {
+        dot.title = "Status unbekannt";
+      }
+
+      const catalogLink = document.createElement("a");
+      catalogLink.href = action.href;
+      catalogLink.textContent = "Im Katalog aufrufen";
+
+      actions.append(dot, catalogLink);
+      info.appendChild(actions);
+
+      card.append(cover, info);
+
+      // Originaldarstellung ersetzen
+      element.dataset.compact = "true";
+      element.replaceChildren(card);
+    }
+
+    // Wartet auf die asynchron geladenen eOPAC-Daten
+    const observer = new MutationObserver(() => {
+      container.querySelectorAll(
+        ".eopac-embedded-listing-element"
+      ).forEach(formatMedium);
+    });
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true
+    });
+
+    // Offizielle eOPAC-Einbindung
     var ecjajem;
 
     (function(d, t) {
       var s = d.createElement(t);
 
       var options = {
-        bibid: 'BGX429094',
-        formHash: 'ecjajem',
+        bibid: "BGX429094",
+        formHash: "ecjajem",
         async: true,
-        feature: 'medialist',
-        alias: 'tonies',
-        format: '',
+        feature: "medialist",
+        alias: "tonies",
+        format: "",
         cover: true,
         actions: true,
         styles: false,
         rak: true,
-        heading: 'h3'
+        heading: "h3"
       };
 
       var done = false;
 
       s.src =
-        'https://www.eopac.net/static/js/embed_inline-min.js';
+        "https://www.eopac.net/static/js/embed_inline-min.js";
 
       s.onload = s.onreadystatechange = function() {
         if (!done &&
             (!this.readyState ||
-             this.readyState === 'loaded' ||
-             this.readyState === 'complete')) {
+             this.readyState === "loaded" ||
+             this.readyState === "complete")) {
           done = true;
 
           try {
@@ -70,7 +185,7 @@
       var scr = d.getElementsByTagName(t)[0];
       scr.parentNode.insertBefore(s, scr);
 
-    })(document, 'script');
+    })(document, "script");
   </script>
 </body>
 </html>

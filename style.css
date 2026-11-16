@@ -1,143 +1,137 @@
 
-/* =========================================
-   Tonies – eOPAC Listenansicht
-   ========================================= */
+/* =====================================
+   Kompakte Tonies-Medienliste
+   ===================================== */
 
 #eopac-ecjajem {
   width: 100%;
   max-width: 100%;
-  font-family: Oswald, sans-serif;
   color: var(--text);
-  overflow-wrap: anywhere;
+  font-family: Oswald, sans-serif;
 }
 
-/* Einzelne Medien */
+/* Standard-Außenabstände zurücksetzen */
 #eopac-ecjajem
 .eopac-embedded-listing-element {
-  display: flow-root;
-  clear: both;
   width: 100%;
-  padding: 1.2rem 0;
   margin: 0;
+  padding: 0;
   border: 0;
-  border-bottom: 1px solid var(--border);
-  box-shadow: none;
   background: transparent;
+  box-shadow: none;
 }
 
-/* Titel */
-#eopac-ecjajem
-.eopac-embedded-listing-element h3 {
+/* Kompakte Zeile */
+.tonie-card {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+  background: #fff;
+}
+
+/* Cover */
+.tonie-cover {
+  width: 80px;
+}
+
+.tonie-cover img {
+  display: block;
+  width: 80px;
+  max-width: 100%;
+  height: auto;
+  max-height: 115px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Informationen */
+.tonie-info {
+  min-width: 0;
+}
+
+.tonie-title {
+  display: inline-block;
+  color: var(--accent);
   font-size: 1.05rem;
   font-weight: 600;
-  margin: 0 0 0.45rem;
   line-height: 1.4;
-}
-
-#eopac-ecjajem
-.eopac-embedded-listing-element h3 a,
-#eopac-ecjajem
-.eopac-embedded-listing-element a {
-  color: var(--accent);
-}
-
-#eopac-ecjajem
-.eopac-embedded-listing-element h3 a {
   text-decoration: none;
+  margin-bottom: 0.25rem;
 }
 
-#eopac-ecjajem
-.eopac-embedded-listing-element a:hover {
+.tonie-title:hover {
   color: var(--accent-dark);
   text-decoration: underline;
 }
 
-/* Cover */
-#eopac-ecjajem
-.eopac-embedded-listing-element img {
-  max-width: 90px;
-  height: auto;
-  border-radius: 2px;
-  border: 1px solid var(--border);
-}
-
-/* Medienbeschreibung */
-#eopac-ecjajem
-.eopac-embedded-listing-element-content {
+.tonie-meta {
   color: var(--muted);
   font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-#eopac-ecjajem
-.eopac-embedded-listing-element-content p {
   margin: 0.2rem 0;
 }
 
-/* Verfügbarkeitsanzeige */
-#eopac-ecjajem
-.eopac-embedded-listing-element-statustext {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* Statuspunkt und Link */
-#eopac-ecjajem
-.eopac-embedded-listing-element-actions {
+/* Status und Kataloglink */
+.tonie-actions {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 8px;
-  margin-top: 0.65rem;
+  margin-top: 0.5rem;
 }
 
-/* eOPAC Ampel */
-#eopac-ecjajem .eopac-embedded--status {
+.tonie-dot {
   display: inline-block;
-  flex: 0 0 10px;
-  width: 10px;
-  height: 10px;
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  font-size: 0;
   background: #999;
 }
 
-#eopac-ecjajem
-.eopac-embedded--status-green {
+.tonie-dot.available {
   background: #299447;
 }
 
-#eopac-ecjajem
-.eopac-embedded--status-red {
+.tonie-dot.unavailable {
   background: #cf3838;
 }
 
-#eopac-ecjajem
-.eopac-embedded--status-yellow {
+.tonie-dot.other {
   background: #d99a22;
 }
 
-/* Kataloglink */
-#eopac-ecjajem .eopac-embedded--action {
+.tonie-actions a {
   color: var(--accent);
   font-size: 0.92rem;
   text-decoration: underline;
 }
 
+.tonie-actions a:hover {
+  color: var(--accent-dark);
+}
+
 /* Smartphone */
 @media (max-width: 560px) {
-  #eopac-ecjajem
-  .eopac-embedded-listing-element {
-    padding: 1rem 0;
+  .tonie-card {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 0.85rem;
+    padding: 0.9rem 0;
   }
 
-  #eopac-ecjajem
-  .eopac-embedded-listing-element img {
-    max-width: 70px;
+  .tonie-cover,
+  .tonie-cover img {
+    width: 70px;
   }
 
-  #eopac-ecjajem
-  .eopac-embedded-listing-element h3 {
+  .tonie-title {
     font-size: 1rem;
+  }
+
+  .tonie-meta {
+    font-size: 0.9rem;
   }
 }
