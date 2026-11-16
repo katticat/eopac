@@ -1,12 +1,6 @@
 
-/* ==========================================
-   KÖB Obernau – Allgemeine Medienlisten
-   ========================================== */
-
-/* Farben */
 :root {
   --bg: #ffffff;
-  --card: #ffffff;
   --text: #333333;
   --muted: #666666;
   --accent: #7a431b;
@@ -19,12 +13,11 @@
   box-sizing: border-box;
 }
 
-/* Allgemeines Layout */
 body {
   margin: 0;
-  font-family: Oswald, sans-serif;
   background: var(--bg);
   color: var(--text);
+  font-family: Oswald, sans-serif;
   line-height: 1.5;
 }
 
@@ -39,107 +32,73 @@ header {
   margin-bottom: 1.5rem;
 }
 
-h1, h3 {
-  margin: 0 0 0.6rem;
+h1 {
+  margin: 0;
+  color: var(--accent);
   font-size: 2rem;
   font-weight: 600;
-  color: var(--accent);
 }
 
-/* eOPAC-Container */
+#status {
+  color: var(--muted);
+}
+
+#status[hidden] {
+  display: none;
+}
+
+/* Original-eOPAC nur als Datenquelle */
 #eopac-ecjajem {
-  width: 100%;
-  max-width: 100%;
-  font-family: Oswald, sans-serif;
-  color: var(--text);
-  overflow-wrap: anywhere;
+  display: none !important;
 }
 
-/* eOPAC-Standardeinstellungen zurücksetzen */
-#eopac-ecjajem
-.eopac-embedded-listing {
+/* Medienliste */
+#medienliste {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
-#eopac-ecjajem
-.eopac-embedded-listing-element {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-/* ==========================================
-   Medienkarten
-   ========================================== */
-
+/* Einzelnes Medium */
 .medium-card {
   display: grid;
   grid-template-columns: 90px minmax(0, 1fr);
-  align-items: start;
   gap: 1.25rem;
-
-  width: 100%;
-  margin: 0;
+  align-items: start;
   padding: 1.2rem 0;
-
-  background: transparent;
   border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  box-shadow: none;
 }
 
-#eopac-ecjajem
-.eopac-embedded-listing-element:first-child
-.medium-card {
+.medium-card:first-of-type {
   border-top: 1px solid var(--border);
 }
 
-/* ==========================================
-   Cover
-   ========================================== */
-
+/* Cover */
 .medium-cover {
   width: 90px;
-  min-width: 0;
 }
 
 .medium-cover a {
   display: block;
-  text-decoration: none;
 }
 
 .medium-cover img {
   display: block;
   width: 90px;
-  max-width: 100%;
   height: auto;
   max-height: 135px;
-
   object-fit: contain;
+  background: var(--soft);
   border: 1px solid var(--border);
   border-radius: 3px;
-  background: var(--soft);
 }
 
-/* ==========================================
-   Medieninformationen
-   ========================================== */
-
+/* Informationen */
 .medium-info {
   min-width: 0;
 }
 
 .medium-title {
-  display: inline-block;
+  display: block;
   margin: 0 0 0.45rem;
-
   color: var(--accent);
   font-size: 1.05rem;
   font-weight: 600;
@@ -147,8 +106,7 @@ h1, h3 {
   text-decoration: none;
 }
 
-.medium-title:hover,
-.medium-title:focus {
+.medium-title:hover {
   color: var(--accent-dark);
   text-decoration: underline;
 }
@@ -157,72 +115,46 @@ h1, h3 {
   margin: 0.2rem 0;
   color: var(--muted);
   font-size: 0.95rem;
-  line-height: 1.5;
 }
 
-.medium-label {
-  color: var(--text);
-  font-weight: 600;
-}
-
-/* ==========================================
-   Verfügbarkeit und Kataloglink
-   ========================================== */
-
+/* Kataloglink */
 .medium-actions {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 8px;
   margin-top: 0.65rem;
 }
 
-/* Allgemeiner Statuspunkt */
+.medium-actions a {
+  color: var(--accent);
+  font-size: 0.92rem;
+  text-decoration: underline;
+}
+
+.medium-actions a:hover {
+  color: var(--accent-dark);
+}
+
+/* Verfügbarkeitsanzeige */
 .medium-dot {
   display: inline-block;
   flex: 0 0 9px;
   width: 9px;
   height: 9px;
-
+  background: #999999;
   border-radius: 50%;
-  background-color: #999999;
 }
 
-/* Medium verfügbar */
 .medium-dot.available {
-  background-color: #299447;
+  background: #299447;
 }
 
-/* Medium nicht verfügbar */
 .medium-dot.unavailable {
-  background-color: #cf3838;
+  background: #cf3838;
 }
 
-/* Sonstiger Status */
-.medium-dot.other {
-  background-color: #d99a22;
-}
-
-/* Kataloglink */
-.medium-actions a {
-  display: inline-block;
-  color: var(--accent);
-  font-size: 0.92rem;
-  font-weight: 400;
-  text-decoration: underline;
-}
-
-.medium-actions a:hover,
-.medium-actions a:focus {
-  color: var(--accent-dark);
-}
-
-/* ==========================================
-   Smartphone und kleine Bildschirme
-   ========================================== */
-
+/* Smartphone */
 @media (max-width: 560px) {
-
   main {
     padding: 1.25rem 1rem;
   }
@@ -252,14 +184,5 @@ h1, h3 {
 
   .medium-meta {
     font-size: 0.9rem;
-  }
-
-  .medium-actions {
-    gap: 7px;
-    margin-top: 0.5rem;
-  }
-
-  .medium-actions a {
-    font-size: 0.88rem;
   }
 }

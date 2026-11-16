@@ -6,72 +6,115 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>Unsere Tonies – KÖB Obernau</title>
+  <title>Medienliste – KÖB Obernau</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="./style.css?v=3">
 </head>
 
 <body>
-  <main>
-    <header>
-      <h1>Unsere Tonies</h1>
-    </header>
+<main>
+  <header>
+    <h1>Unsere Medien</h1>
+  </header>
 
-    <div id="eopac-ecjajem">
-      <p>Die Tonies werden geladen …</p>
-    </div>
-  </main>
+  <div id="medienliste">
+    <p id="status">Medien werden geladen …</p>
+  </div>
 
-  <script>
-    const container =
-      document.getElementById("eopac-ecjajem");
+  <!-- Originaldaten des eOPAC -->
+  <div id="eopac-ecjajem">
+    Medien werden geladen …
+  </div>
+</main>
 
-    
+<script>
+"use strict";
+
+// Konfiguration der Medienliste
+const params = new URLSearchParams(location.search);
+const listenAlias = params.get("liste") || "tonies";
+
+const quelle = document.getElementById("eopac-ecjajem");
+const ziel = document.getElementById("medienliste");
+const statusText = document.getElementById("status");
+
+const bearbeitet = new WeakSet();
+
 function formatMedium(element) {
-  if (element.dataset.compact === "true") return;
+  if (bearbeitet.has(element)) return;
 
-  const titleLink = element.querySelector("h3 a");
-  const image = element.querySelector("img");
+  // Original-Link zum Katalog
   const action = element.querySelector(
-    ".eopac-embedded--action"
+    "a.eopac-embedded--action"
   );
+
+  // Titel-Link suchen, unabhängig vom Heading-Tag
+  const titelLink = [...element.querySelectorAll("a")]
+    .find(a =>
+      a !== action &&
+      a.textContent.trim().length > 0 &&
+      !a.closest(
+        ".eopac-embedded-listing-element-actions"
+      )
+    );
+
+  if (!titelLink || !action) return;
+
+  // Daten sichern
+  const titel = titelLink.textContent.trim();
+  const bild = element.querySelector("img");
   const status = element.querySelector(
     ".eopac-embedded--status"
   );
 
-  if (!titleLink || !action) return;
+  // Altersempfehlung, soweit vorhanden
+  const text = element.textContent || "";
+  const alter = text.match(
+    /Altersempfehlung:\s*ab\s*(\d+)\s*Jahren?/i
+  );
 
-  const card = document.createElement("div");
+  // Karte erstellen
+  const card = document.createElement("article");
   card.className = "medium-card";
 
   // Cover
   const cover = document.createElement("div");
   cover.className = "medium-cover";
 
-  if (image) {
-    const img = image.cloneNode(true);
-    img.removeAttribute("style");
+  if (bild) {
+    const img = document.createElement("img");
+    img.src = bild.currentSrc || bild.src;
+    img.alt = titel;
     img.loading = "lazy";
-    img.alt = titleLink.textContent.trim();
 
-    const coverLink = document.createElement("a");
-    coverLink.href = titleLink.href;
-    coverLink.appendChild(img);
-    cover.appendChild(coverLink);
+    const link = document.createElement("a");
+    link.href = titelLink.href;
+    link.appendChild(img);
+    cover.appendChild(link);
   }
 
-  // Medieninformationen
+  // Informationen
   const info = document.createElement("div");
   info.className = "medium-info";
 
   const title = document.createElement("a");
   title.className = "medium-title";
-  title.href = titleLink.href;
-  title.textContent = titleLink.textContent.trim();
+  title.href = titelLink.href;
+  title.textContent = titel;
 
   info.appendChild(title);
 
-  // Verfügbarkeit und Kataloglink
+  if (alter) {
+    const meta = document.createElement("p");
+    meta.className = "medium-meta";
+    meta.textContent = "Ab " + alter[1] + " Jahren";
+    info.appendChild(meta);
+  }
+
+  // Verfügbarkeit
   const actions = document.createElement("div");
   actions.className = "medium-actions";
 
@@ -82,90 +125,93 @@ function formatMedium(element) {
     if (status.classList.contains(
       "eopac-embedded--status-green")) {
       dot.classList.add("available");
+      dot.title = "Entleihbar";
     } else if (status.classList.contains(
       "eopac-embedded--status-red")) {
       dot.classList.add("unavailable");
-    } else if (status.classList.contains(
-      "eopac-embedded--status-yellow")) {
-      dot.classList.add("other");
+      dot.title = "Nicht entleihbar";
+    } else {
+      dot.title = status.title || "Status unbekannt";
     }
-    dot.title = status.title || "Status unbekannt";
   } else {
     dot.title = "Status unbekannt";
   }
 
-  const catalogLink = document.createElement("a");
-  catalogLink.href = action.href;
-  catalogLink.textContent = "Im Katalog aufrufen";
+  const katalog = document.createElement("a");
+  katalog.href = action.href;
+  katalog.textContent = "Im Katalog aufrufen";
 
-  actions.append(dot, catalogLink);
+  actions.append(dot, katalog);
   info.appendChild(actions);
 
   card.append(cover, info);
 
-  element.dataset.compact = "true";
-  element.replaceChildren(card);
+  // Karte in eigener Medienliste ausgeben
+  ziel.appendChild(card);
+  bearbeitet.add(element);
+
+  statusText.hidden = true;
 }
 
+// Vom eOPAC geladene Medien auswerten
+function aktualisieren() {
+  quelle.querySelectorAll(
+    ".eopac-embedded-listing-element"
+  ).forEach(formatMedium);
+}
 
-    // Wartet auf die asynchron geladenen eOPAC-Daten
-    const observer = new MutationObserver(() => {
-      container.querySelectorAll(
-        ".eopac-embedded-listing-element"
-      ).forEach(formatMedium);
-    });
+const observer = new MutationObserver(aktualisieren);
 
-    observer.observe(container, {
-      childList: true,
-      subtree: true
-    });
+observer.observe(quelle, {
+  childList: true,
+  subtree: true
+});
 
-    // Offizielle eOPAC-Einbindung
-    var ecjajem;
+// eOPAC laden
+var ecjajem;
 
-    (function(d, t) {
-      var s = d.createElement(t);
+(function(d, t) {
+  const s = d.createElement(t);
 
-      var options = {
-        bibid: "BGX429094",
-        formHash: "ecjajem",
-        async: true,
-        feature: "medialist",
-        alias: "tonies",
-        format: "",
-        cover: true,
-        actions: true,
-        styles: false,
-        rak: true,
-        heading: "h3"
-      };
+  const options = {
+    bibid: "BGX429094",
+    formHash: "ecjajem",
+    async: true,
+    feature: "medialist",
+    alias: listenAlias,
+    format: "",
+    cover: true,
+    actions: true,
+    styles: false,
+    rak: true,
+    heading: "h3"
+  };
 
-      var done = false;
+  s.src =
+    "https://www.eopac.net/static/js/embed_inline-min.js";
 
-      s.src =
-        "https://www.eopac.net/static/js/embed_inline-min.js";
+  s.onload = function() {
+    try {
+      ecjajem = new BVSeOPACinline();
+      ecjajem.initialize(options);
+      ecjajem.inject();
+      aktualisieren();
+    } catch (error) {
+      console.error("eOPAC-Fehler:", error);
+      statusText.hidden = false;
+      statusText.textContent =
+        "Die Medienliste konnte nicht geladen werden.";
+    }
+  };
 
-      s.onload = s.onreadystatechange = function() {
-        if (!done &&
-            (!this.readyState ||
-             this.readyState === "loaded" ||
-             this.readyState === "complete")) {
-          done = true;
+  s.onerror = function() {
+    statusText.hidden = false;
+    statusText.textContent =
+      "Der eOPAC ist momentan nicht erreichbar.";
+  };
 
-          try {
-            ecjajem = new BVSeOPACinline();
-            ecjajem.initialize(options);
-            ecjajem.inject();
-          } catch (e) {
-            console.error("eOPAC-Fehler:", e);
-          }
-        }
-      };
-
-      var scr = d.getElementsByTagName(t)[0];
-      scr.parentNode.insertBefore(s, scr);
-
-    })(document, "script");
-  </script>
+  d.head.appendChild(s);
+})(document, "script");
+</script>
 </body>
 </html>
