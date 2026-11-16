@@ -29,104 +29,87 @@
     const container =
       document.getElementById("eopac-ecjajem");
 
-    function formatMedium(element) {
-      if (element.dataset.compact === "true") return;
+    
+function formatMedium(element) {
+  if (element.dataset.compact === "true") return;
 
-      // Originaldaten des eOPAC auslesen
-      const titleLink = element.querySelector("h3 a");
-      const image = element.querySelector("img");
-      const action = element.querySelector(
-        ".eopac-embedded--action"
-      );
-      const status = element.querySelector(
-        ".eopac-embedded--status"
-      );
+  const titleLink = element.querySelector("h3 a");
+  const image = element.querySelector("img");
+  const action = element.querySelector(
+    ".eopac-embedded--action"
+  );
+  const status = element.querySelector(
+    ".eopac-embedded--status"
+  );
 
-      if (!titleLink || !action) return;
+  if (!titleLink || !action) return;
 
-      const originalText = element.textContent || "";
-      const ageMatch = originalText.match(
-        /(?:ab\s+)(\d+)\s+Jahren?/i
-      );
+  const card = document.createElement("div");
+  card.className = "medium-card";
 
-      // Neue kompakte Medienzeile
-      const card = document.createElement("div");
-      card.className = "tonie-card";
+  // Cover
+  const cover = document.createElement("div");
+  cover.className = "medium-cover";
 
-      // Cover
-      const cover = document.createElement("div");
-      cover.className = "tonie-cover";
+  if (image) {
+    const img = image.cloneNode(true);
+    img.removeAttribute("style");
+    img.loading = "lazy";
+    img.alt = titleLink.textContent.trim();
 
-      if (image) {
-        const img = image.cloneNode(true);
-        img.removeAttribute("style");
-        img.loading = "lazy";
-        img.alt = titleLink.textContent.trim();
+    const coverLink = document.createElement("a");
+    coverLink.href = titleLink.href;
+    coverLink.appendChild(img);
+    cover.appendChild(coverLink);
+  }
 
-        const coverLink = document.createElement("a");
-        coverLink.href = titleLink.href;
-        coverLink.appendChild(img);
-        cover.appendChild(coverLink);
-      }
+  // Medieninformationen
+  const info = document.createElement("div");
+  info.className = "medium-info";
 
-      // Informationen
-      const info = document.createElement("div");
-      info.className = "tonie-info";
+  const title = document.createElement("a");
+  title.className = "medium-title";
+  title.href = titleLink.href;
+  title.textContent = titleLink.textContent.trim();
 
-      const title = document.createElement("a");
-      title.className = "tonie-title";
-      title.href = titleLink.href;
-      title.textContent = titleLink.textContent.trim();
+  info.appendChild(title);
 
-      const type = document.createElement("div");
-      type.className = "tonie-meta";
-      type.textContent = "Tonie – Hörfigur";
+  // Verfügbarkeit und Kataloglink
+  const actions = document.createElement("div");
+  actions.className = "medium-actions";
 
-      info.append(title, type);
+  const dot = document.createElement("span");
+  dot.className = "medium-dot";
 
-      if (ageMatch) {
-        const age = document.createElement("div");
-        age.className = "tonie-meta";
-        age.textContent = "Ab " + ageMatch[1] + " Jahren";
-        info.appendChild(age);
-      }
-
-      // Verfügbarkeit und Kataloglink
-      const actions = document.createElement("div");
-      actions.className = "tonie-actions";
-
-      const dot = document.createElement("span");
-      dot.className = "tonie-dot";
-
-      if (status) {
-        if (status.classList.contains(
-          "eopac-embedded--status-green")) {
-          dot.classList.add("available");
-        } else if (status.classList.contains(
-          "eopac-embedded--status-red")) {
-          dot.classList.add("unavailable");
-        } else if (status.classList.contains(
-          "eopac-embedded--status-yellow")) {
-          dot.classList.add("other");
-        }
-        dot.title = status.title || "Status unbekannt";
-      } else {
-        dot.title = "Status unbekannt";
-      }
-
-      const catalogLink = document.createElement("a");
-      catalogLink.href = action.href;
-      catalogLink.textContent = "Im Katalog aufrufen";
-
-      actions.append(dot, catalogLink);
-      info.appendChild(actions);
-
-      card.append(cover, info);
-
-      // Originaldarstellung ersetzen
-      element.dataset.compact = "true";
-      element.replaceChildren(card);
+  if (status) {
+    if (status.classList.contains(
+      "eopac-embedded--status-green")) {
+      dot.classList.add("available");
+    } else if (status.classList.contains(
+      "eopac-embedded--status-red")) {
+      dot.classList.add("unavailable");
+    } else if (status.classList.contains(
+      "eopac-embedded--status-yellow")) {
+      dot.classList.add("other");
     }
+    dot.title = status.title || "Status unbekannt";
+  } else {
+    dot.title = "Status unbekannt";
+  }
+
+  const catalogLink = document.createElement("a");
+  catalogLink.href = action.href;
+  catalogLink.textContent = "Im Katalog aufrufen";
+
+  actions.append(dot, catalogLink);
+  info.appendChild(actions);
+
+  card.append(cover, info);
+
+  element.dataset.compact = "true";
+  element.replaceChildren(card);
+}
+
 
     // Wartet auf die asynchron geladenen eOPAC-Daten
     const observer = new MutationObserver(() => {
