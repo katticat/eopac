@@ -35,7 +35,7 @@ main {
 h1 {
   margin: 0 0 1.5rem;
   color: var(--accent);
-  font-size: 2rem;
+  /*font-size: 2rem;*/
   font-weight: 600;
 }
 
@@ -74,7 +74,7 @@ h1 {
   margin: 0 0 0.45rem;
   padding: 0;
 
-  font-size: 1.05rem;
+  /*font-size: 1.05rem;*/
   font-weight: 600;
   line-height: 1.4;
 }
@@ -135,7 +135,7 @@ h1 {
 /* Altersangabe */
 #eopac-ecjajem .eopac-embedded-age {
   margin: 0.3rem 0;
-  font-size: 0.95rem;
+  /*font-size: 0.95rem;*/
   color: var(--muted);
 }
 
@@ -203,7 +203,7 @@ h1 {
 #eopac-ecjajem
 .eopac-embedded--action {
   color: var(--accent);
-  font-size: 0.92rem;
+  /*font-size: 0.92rem;*/
   font-weight: 400;
   text-decoration: underline;
 }
@@ -223,7 +223,7 @@ h1 {
   }
 
   h1 {
-    font-size: 1.65rem;
+    /*font-size: 1.65rem;*/
   }
 
   #eopac-ecjajem
@@ -253,6 +253,7 @@ h1 {
   .eopac-embedded-listing-element-content,
   #eopac-ecjajem
   .eopac-embedded-age {
-    font-size: 0.9rem;
+    font-size: 100%;
+    
   }
 }
