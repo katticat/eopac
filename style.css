@@ -1,114 +1,60 @@
 
 /* ==========================================
-   Optimierung: Schrift und Cover
+   KÖB Obernau – Medienlisten
    ========================================== */
 
-/* Gut lesbare Schrift für die Medienliste */
+:root {
+  --bg: #ffffff;
+  --text: #333333;
+  --muted: #666666;
+  --accent: #7a431b;
+  --accent-dark: #5a2f12;
+  --border: #e5e5e5;
+  --soft: #f7f4ef;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.55;
 }
 
-/* Oswald nur für die Hauptüberschrift */
-h1 {
-  font-family: Oswald, sans-serif;
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: 0.2px;
-}
-
-/* Medieneinträge */
-#eopac-ecjajem {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#eopac-ecjajem
-.eopac-embedded-listing-element {
-  grid-template-columns: 110px minmax(0, 1fr);
-  column-gap: 1.5rem;
-  padding: 1.35rem 0;
-}
-
-/* Titel */
-#eopac-ecjajem
-.eopac-embedded-listing-element-title {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.08rem;
-  font-weight: 600;
-  line-height: 1.45;
-  letter-spacing: normal;
-}
-
-/* Beschreibung und Altersangabe */
-#eopac-ecjajem
-.eopac-embedded-listing-element-content,
-#eopac-ecjajem
-.eopac-embedded-age {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.55;
-}
-
-/* Coverbereich vergrößern */
-#eopac-ecjajem
-.eopac-embedded--cover {
-  width: 110px;
-}
-
-/* Coverbild größer anzeigen */
-#eopac-ecjajem
-.eopac-embedded--cover img {
+main {
   display: block;
-  width: 110px;
-  max-width: 100%;
-  height: auto;
-  max-height: none;
-  object-fit: contain;
-  border-radius: 3px;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-/* Kataloglink */
-#eopac-ecjajem
-.eopac-embedded--action {
+header {
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  color: var(--accent);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.92rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-/* Smartphone */
-@media (max-width: 560px) {
-  #eopac-ecjajem
-  .eopac-embedded-listing-element {
-    grid-template-columns: 85px minmax(0, 1fr);
-    column-gap: 1rem;
-  }
-
-  #eopac-ecjajem
-  .eopac-embedded--cover {
-    width: 85px;
-  }
-
-  #eopac-ecjajem
-  .eopac-embedded--cover img {
-    width: 85px;
-    max-height: none;
-  }
-
-  #eopac-ecjajem
-  .eopac-embedded-listing-element-title {
-    font-size: 1rem;
-  }
-}
-
-
-/* =====================================
-   Navigation der Medienlisten
-   ===================================== */
+/* ==========================================
+   Navigation – sechs Medienlisten
+   ========================================== */
 
 .medien-navigation {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
+  width: 100%;
   margin: 0 0 2rem;
   padding: 0 0 1.5rem;
   border-bottom: 1px solid var(--border);
@@ -122,10 +68,10 @@ h1 {
   gap: 8px;
 
   min-width: 0;
-  min-height: 125px;
+  min-height: 128px;
   padding: 12px 8px;
 
-  background: #ffffff;
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 8px;
 
@@ -136,46 +82,37 @@ h1 {
   text-align: center;
   text-decoration: none;
 
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .medien-nav-item img {
   display: block;
-  width: 75px;
-  height: 75px;
+  width: 76px;
+  height: 76px;
   object-fit: contain;
 }
 
-/* Platzhalter für weitere Bilder */
 .medien-nav-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 75px;
-  height: 75px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   background: var(--soft);
   color: var(--accent);
   font-size: 1.4rem;
-  font-weight: 500;
 }
 
-/* Hover */
 .medien-nav-item:hover {
   background: var(--soft);
   border-color: #d8b98c;
   color: var(--accent-dark);
-  transform: translateY(-2px);
 }
 
-/* Aktuell gewählte Liste */
 .medien-nav-item.active {
   background: var(--soft);
   border-color: var(--accent);
-  color: var(--accent-dark);
   box-shadow: inset 0 -3px 0 var(--accent);
 }
 
@@ -184,15 +121,261 @@ h1 {
   outline-offset: 3px;
 }
 
-/* Tablet */
+/* ==========================================
+   eOPAC-Container
+   ========================================== */
+
+#eopac-ecjajem {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+#eopac-ecjajem .eopac-embedded-listing {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   Ein Medium – Cover links, Text rechts
+   ========================================== */
+
+#eopac-ecjajem
+.eopac-embedded-listing-element {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 1.5rem;
+  align-items: start;
+
+  clear: both;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 1.35rem 0;
+
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#eopac-ecjajem
+.eopac-embedded-listing-element:first-child {
+  border-top: 1px solid var(--border);
+}
+
+/* Titel */
+#eopac-ecjajem
+.eopac-embedded-listing-element-title {
+  grid-column: 2;
+  grid-row: 1;
+
+  margin: 0 0 0.45rem;
+  padding: 0;
+  float: none;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+#eopac-ecjajem
+.eopac-embedded-listing-element-title a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+#eopac-ecjajem
+.eopac-embedded-listing-element-title a:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+/* ==========================================
+   Cover
+   ========================================== */
+
+#eopac-ecjajem .eopac-embedded--cover {
+  grid-column: 1;
+  grid-row: 1 / 4;
+
+  display: block;
+  float: none;
+  clear: none;
+  width: 110px;
+  max-width: 100%;
+  height: auto;
+
+  margin: 0;
+  padding: 0;
+}
+
+#eopac-ecjajem .eopac-embedded--cover img {
+  display: block;
+  width: 110px;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+
+  margin: 0;
+  object-fit: contain;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+/* ==========================================
+   Beschreibung und Medieninformationen
+   ========================================== */
+
+#eopac-ecjajem
+.eopac-embedded-listing-element-details {
+  grid-column: 2;
+  grid-row: 2;
+
+  display: block;
+  float: none;
+  clear: none;
+
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+#eopac-ecjajem
+.eopac-embedded-listing-element-content {
+  margin: 0 0 0.45rem;
+  padding: 0;
+
+  color: var(--muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+#eopac-ecjajem .eopac-embedded-age {
+  margin: 0.3rem 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#eopac-ecjajem .eopac-embedded-age strong {
+  color: var(--text);
+}
+
+/* Zusätzlichen Verfügbarkeitstext ausblenden */
+#eopac-ecjajem
+.eopac-embedded-listing-element-statustext {
+  display: none;
+}
+
+/* Ausführliche Katalogdaten ausblenden */
+#eopac-ecjajem
+.eopac-embedded-listing-element-rak {
+  display: none;
+}
+
+/* ==========================================
+   Verfügbarkeit + Kataloglink
+   ========================================== */
+
+#eopac-ecjajem
+.eopac-embedded-listing-element-actions {
+  grid-column: 2;
+  grid-row: 3;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  float: none;
+  clear: none;
+  width: 100%;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+#eopac-ecjajem .eopac-embedded--status {
+  display: inline-block;
+  flex: 0 0 10px;
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  font-size: 0;
+  background: #999999;
+}
+
+#eopac-ecjajem
+.eopac-embedded--status-green {
+  background: #299447;
+}
+
+#eopac-ecjajem
+.eopac-embedded--status-red {
+  background: #cf3838;
+}
+
+#eopac-ecjajem
+.eopac-embedded--status-yellow {
+  background: #d99a22;
+}
+
+#eopac-ecjajem .eopac-embedded--action {
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.92rem;
+  text-decoration: underline;
+}
+
+#eopac-ecjajem .eopac-embedded--action:hover {
+  color: var(--accent-dark);
+}
+
+/* ==========================================
+   Tablet
+   ========================================== */
+
 @media (max-width: 800px) {
   .medien-navigation {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-/* Smartphone */
-@media (max-width: 480px) {
+/* ==========================================
+   Smartphone
+   ========================================== */
+
+@media (max-width: 560px) {
+  main {
+    padding: 1.25rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.65rem;
+  }
+
   .medien-navigation {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
@@ -208,10 +391,36 @@ h1 {
     width: 65px;
     height: 65px;
   }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element {
+    grid-template-columns: 85px minmax(0, 1fr);
+    column-gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  #eopac-ecjajem .eopac-embedded--cover {
+    width: 85px;
+  }
+
+  #eopac-ecjajem .eopac-embedded--cover img {
+    width: 85px;
+  }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element-title {
+    font-size: 1rem;
+  }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element-content,
+  #eopac-ecjajem .eopac-embedded-age {
+    font-size: 0.9rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .medien-nav-item {
     transition: none;
   }
-} 
+}
