@@ -1,1 +1,1 @@
-medien.html?liste=tonies
+https://katticat.github.io/eopac/medien.html?liste=tonies
