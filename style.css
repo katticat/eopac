@@ -97,7 +97,7 @@ h1 {
   line-height: 1.25;
 }
 
-.medium-title {
+.eopac-embedded-listing-element-title {
   display: inline-block;
   margin-bottom: 0.45rem;
   color: var(--accent);
@@ -106,8 +106,8 @@ h1 {
   text-decoration: none;
 }
 
-.medium-title:hover,
-.medium-title:focus {
+.eopac-embedded-listing-element-title:hover,
+.eopac-embedded-listing-element-title:focus {
   color: var(--accent-dark);
   text-decoration: underline;
 }
