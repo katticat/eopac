@@ -1,259 +1,217 @@
 
 /* ==========================================
-   KÖB Obernau – eOPAC Medienlisten
+   Optimierung: Schrift und Cover
    ========================================== */
 
-:root {
-  --bg: #ffffff;
-  --text: #333333;
-  --muted: #666666;
-  --accent: #7a431b;
-  --accent-dark: #5a2f12;
-  --border: #e5e5e5;
-  --soft: #f7f4ef;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* Gut lesbare Schrift für die Medienliste */
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Oswald, sans-serif;
-  line-height: 1.5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
-main {
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
+/* Oswald nur für die Hauptüberschrift */
 h1 {
-  margin: 0 0 1.5rem;
-  color: var(--accent);
-  /*font-size: 2rem;*/
-  font-weight: 600;
+  font-family: Oswald, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
-/* eOPAC Container */
+/* Medieneinträge */
 #eopac-ecjajem {
-  width: 100%;
-  max-width: 100%;
-  font-family: inherit;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-/* ==========================================
-   Einzelnes Medium
-   ========================================== */
 
 #eopac-ecjajem
 .eopac-embedded-listing-element {
-  display: grid;
-  grid-template-columns: 90px minmax(0, 1fr);
-  column-gap: 1.25rem;
-
-  padding: 1.2rem 0;
-  margin: 0;
-
-  border: 0;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
-  box-shadow: none;
+  grid-template-columns: 110px minmax(0, 1fr);
+  column-gap: 1.5rem;
+  padding: 1.35rem 0;
 }
 
-/* Titel rechts oben */
+/* Titel */
 #eopac-ecjajem
 .eopac-embedded-listing-element-title {
-  grid-column: 2;
-  grid-row: 1;
-
-  margin: 0 0 0.45rem;
-  padding: 0;
-
-  /*font-size: 1.05rem;*/
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.08rem;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.45;
+  letter-spacing: normal;
 }
 
+/* Beschreibung und Altersangabe */
 #eopac-ecjajem
-.eopac-embedded-listing-element-title a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
+.eopac-embedded-listing-element-content,
 #eopac-ecjajem
-.eopac-embedded-listing-element-title a:hover {
-  color: var(--accent-dark);
-  text-decoration: underline;
+.eopac-embedded-age {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
 }
 
-/* Cover links */
+/* Coverbereich vergrößern */
 #eopac-ecjajem
 .eopac-embedded--cover {
-  grid-column: 1;
-  grid-row: 1 / span 3;
-  width: 90px;
-  margin: 0;
-  padding: 0;
+  width: 110px;
 }
 
+/* Coverbild größer anzeigen */
 #eopac-ecjajem
 .eopac-embedded--cover img {
   display: block;
-  width: 90px;
+  width: 110px;
   max-width: 100%;
   height: auto;
-  max-height: 135px;
+  max-height: none;
   object-fit: contain;
-  border: 1px solid var(--border);
   border-radius: 3px;
-  background: var(--soft);
-}
-
-/* Medieninformationen rechts */
-#eopac-ecjajem
-.eopac-embedded-listing-element-details {
-  grid-column: 2;
-  grid-row: 2;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-}
-
-/* Beschreibung */
-#eopac-ecjajem
-.eopac-embedded-listing-element-content {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 0.4rem;
-}
-
-/* Altersangabe */
-#eopac-ecjajem .eopac-embedded-age {
-  margin: 0.3rem 0;
-  /*font-size: 0.95rem;*/
-  color: var(--muted);
-}
-
-/* Verfügbarkeitstext */
-#eopac-ecjajem
-.eopac-embedded-listing-element-statustext {
-  display: none;
-}
-
-/* Bibliografische Langbeschreibung ausblenden */
-#eopac-ecjajem
-.eopac-embedded-listing-element-rak {
-  display: none;
-}
-
-/* ==========================================
-   Verfügbarkeitsampel + Kataloglink
-   ========================================== */
-
-#eopac-ecjajem
-.eopac-embedded-listing-element-actions {
-  grid-column: 2;
-  grid-row: 3;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  margin-top: 0.55rem;
-  padding: 0;
-}
-
-/* Statuspunkte */
-#eopac-ecjajem .eopac-embedded--status {
-  display: inline-block;
-  flex: 0 0 9px;
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  margin: 0;
-  font-size: 0;
-  border-radius: 50%;
-  background: #999999;
-}
-
-/* Entleihbar */
-#eopac-ecjajem
-.eopac-embedded--status-green {
-  background: #299447;
-}
-
-/* Entliehen */
-#eopac-ecjajem
-.eopac-embedded--status-red {
-  background: #cf3838;
-}
-
-/* Weitere Statusangaben */
-#eopac-ecjajem
-.eopac-embedded--status-yellow {
-  background: #d99a22;
 }
 
 /* Kataloglink */
 #eopac-ecjajem
 .eopac-embedded--action {
-  color: var(--accent);
-  /*font-size: 0.92rem;*/
-  font-weight: 400;
-  text-decoration: underline;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.92rem;
 }
 
-#eopac-ecjajem
-.eopac-embedded--action:hover {
-  color: var(--accent-dark);
-}
-
-/* ==========================================
-   Smartphone
-   ========================================== */
-
+/* Smartphone */
 @media (max-width: 560px) {
-  main {
-    padding: 1.25rem 1rem;
-  }
-
-  h1 {
-    /*font-size: 1.65rem;*/
-  }
-
   #eopac-ecjajem
   .eopac-embedded-listing-element {
-    grid-template-columns: 70px minmax(0, 1fr);
+    grid-template-columns: 85px minmax(0, 1fr);
     column-gap: 1rem;
-    padding: 1rem 0;
   }
 
   #eopac-ecjajem
   .eopac-embedded--cover {
-    width: 70px;
+    width: 85px;
   }
 
   #eopac-ecjajem
   .eopac-embedded--cover img {
-    width: 70px;
-    max-height: 105px;
+    width: 85px;
+    max-height: none;
   }
 
   #eopac-ecjajem
   .eopac-embedded-listing-element-title {
     font-size: 1rem;
   }
+}
 
-  #eopac-ecjajem
-  .eopac-embedded-listing-element-content,
-  #eopac-ecjajem
-  .eopac-embedded-age {
-    font-size: 100%;
-    
+
+/* =====================================
+   Navigation der Medienlisten
+   ===================================== */
+
+.medien-navigation {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 2rem;
+  padding: 0 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.medien-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-width: 0;
+  min-height: 125px;
+  padding: 12px 8px;
+
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.medien-nav-item img {
+  display: block;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+/* Platzhalter für weitere Bilder */
+.medien-nav-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+/* Hover */
+.medien-nav-item:hover {
+  background: var(--soft);
+  border-color: #d8b98c;
+  color: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+/* Aktuell gewählte Liste */
+.medien-nav-item.active {
+  background: var(--soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+.medien-nav-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+  .medien-navigation {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Smartphone */
+@media (max-width: 480px) {
+  .medien-navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .medien-nav-item {
+    min-height: 110px;
+    padding: 10px 6px;
+  }
+
+  .medien-nav-item img,
+  .medien-nav-placeholder {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .medien-nav-item {
+    transition: none;
   }
 }
