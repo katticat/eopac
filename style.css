@@ -1,264 +1,107 @@
-:root {
-  --bg: #ffffff;
-  --card: #ffffff;
-  --text: #333333;
-  --muted: #666666;
-  --accent: #7a431b;
-  --accent-dark: #5a2f12;
-  --border: #e5e5e5;
-  --soft: #f7f4ef;
-}
 
-* {
-  box-sizing: border-box;
-}
+/* =========================================
+   eOPAC Medienliste – KÖB Obernau
+   ========================================= */
 
-body {
-  margin: 0;
-  font-family: Oswald,sans-serif;
-  background: var(--bg);
+#eopac-ecjajem {
+  font-family: Oswald, sans-serif;
   color: var(--text);
+  font-size: 1rem;
   line-height: 1.5;
 }
 
-main {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-header {
-  margin-bottom: 1.5rem;
-}
-
-h1 {
-  margin: 0 0 0.6rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.intro {
+/* Gesamtliste */
+#eopac-ecjajem .eopac-embedded-listing {
+  width: 100%;
   margin: 0;
-  color: var(--muted);
-  font-size: 1rem;
-}
-
-#status {
-  margin: 1rem 0;
-  color: var(--muted);
-}
-
-#medienliste {
-  list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.medium-card {
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 1.25rem;
+/* Einzelnes Medium */
+#eopac-ecjajem .eopac-embedded-listing-element {
+  display: flow-root;
   padding: 1.2rem 0;
-  border-bottom: 1px solid var(--border);
+  margin: 0;
   background: transparent;
-  box-shadow: none;
+  border: 0;
+  border-bottom: 1px solid var(--border);
   border-radius: 0;
+  box-shadow: none;
 }
 
-.medium-card:first-child {
-  border-top: 1px solid var(--border);
-}
-
-.cover {
+/* Coverbereich */
+#eopac-ecjajem
+.eopac-embedded-listing-element-cover {
+  float: left;
   width: 90px;
-  min-height: 128px;
+  margin: 0 1.25rem 0 0;
+}
+
+/* Coverbilder */
+#eopac-ecjajem
+.eopac-embedded-listing-element img {
+  max-width: 90px;
+  height: auto;
+  border: 1px solid var(--border);
   border-radius: 2px;
   background: var(--soft);
-  object-fit: cover;
-  border: 1px solid var(--border);
 }
 
-.cover-placeholder {
-  width: 90px;
-  min-height: 128px;
-  border-radius: 2px;
-  border: 1px solid var(--border);
-  background: var(--soft);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  text-align: center;
-  padding: 0.5rem;
-  color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.25;
-}
-
-.medium-title {
-  display: inline-block;
-  margin-bottom: 0.45rem;
-  color: var(--accent);
+/* Titel */
+#eopac-ecjajem
+.eopac-embedded-listing-element h3 {
+  margin: 0 0 0.45rem;
+  padding: 0;
   font-size: 1.05rem;
   font-weight: 600;
+  line-height: 1.4;
+  color: var(--accent);
+}
+
+#eopac-ecjajem
+.eopac-embedded-listing-element h3 a {
+  color: var(--accent);
   text-decoration: none;
 }
 
-.medium-title:hover,
-.medium-title:focus {
+#eopac-ecjajem
+.eopac-embedded-listing-element h3 a:hover {
   color: var(--accent-dark);
   text-decoration: underline;
 }
 
-.meta {
-  margin: 0.2rem 0;
+/* Medieninformationen */
+#eopac-ecjajem
+.eopac-embedded-listing-element-content {
   color: var(--muted);
   font-size: 0.95rem;
 }
 
-.label {
-  font-weight: 600;
-  color: var(--text);
+#eopac-ecjajem
+.eopac-embedded-listing-element p {
+  margin: 0.2rem 0;
 }
 
-.eopac-link {
-  display: inline-block;
-  margin-top: 0.65rem;
-  color: var(--accent);
-  font-size: 0.92rem;
-  text-decoration: underline;
+/* Verfügbarkeitstext */
+#eopac-ecjajem
+.eopac-embedded-listing-element-statustext {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
 }
 
-.eopac-link:hover,
-.eopac-link:focus {
-  color: var(--accent-dark);
-}
-
-@media (max-width: 560px) {
-  main {
-    padding: 1.25rem 1rem;
-  }
-
-  h1 {
-    font-size: 1.65rem;
-  }
-
-  .medium-card {
-    grid-template-columns: 70px 1fr;
-    gap: 1rem;
-  }
-
-  .cover,
-  .cover-placeholder {
-    width: 70px;
-    min-height: 100px;
-  }
-}
-
-#openings {
-  background: #fff;
-  border: 1px solid #e6d8c8;
-  border-radius: 6px;
-  padding: 1.25rem;
-}
-
-.openings-info-badge {
-  background: #f1e7dc;
-  color: #7a431b;
-  border-left: 4px solid #7a431b;
-  padding: 0.55rem 0.75rem;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 1rem;
-}
-
-.openings-info-badge.closed,
-.openings-info-badge {
-  border-radius: 0;
-}
-
-#openings table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 0.5rem;
-}
-
-#openings td,
-#openings th {
-  padding: 0.55rem 0.4rem;
-  border-bottom: 1px solid #e6d8c8;
-}
-
-#openings a {
-  color: #7a431b;
-  font-weight: 500;
-  display: inline-block;
-  margin-top: 1rem;
-}
-
-#openings h3 {
-  color: #7a431b;
-  margin-top: 1.5rem;
-}
-
-.openings-events {
-  background: #ffffff;
-  border-left: 4px solid #d8b98c;
-  padding: 1rem;
-  margin-top: 1rem;
-}
-/* Verfügbarkeitsanzeige vor dem Kataloglink */
-
-/* Grundstil des eOPAC-Bereichs */
-#eopac-ecjajem {
-  font-family: Oswald, sans-serif;
-  color: var(--text);
-}
-
-/* Verfügbarkeitsanzeige */
-.eopac-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 0.65rem;
-  color: var(--accent);
-  text-decoration: underline;
-}
-
-.eopac-link::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #999999;
-  flex-shrink: 0;
-}
-
-.eopac-link.entleihbar::before {
-  background: #299447;
-}
-
-.eopac-link.entliehen::before {
-  background: #cf3838;
-}
-
-.eopac-link:hover {
-  color: var(--accent-dark);
-}
-
-/* eOPAC: Kataloglink und Verfügbarkeitsstatus */
-
+/* Kataloglink mit Ampelpunkt */
+#eopac-ecjajem
 .eopac-embedded-listing-element-actions {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 0.65rem;
+  flex-wrap: wrap;
 }
 
-/* Vorhandenen Statuspunkt gestalten */
-.eopac-embedded--status {
+/* Statuspunkt */
+#eopac-ecjajem .eopac-embedded--status {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -267,4 +110,69 @@ h1 {
   padding: 0;
   margin: 0;
   font-size: 0;
+  background: #999;
+}
+
+/* Verfügbar */
+#eopac-ecjajem
+.eopac-embedded--status-green {
+  background: #299447;
+}
+
+/* Nicht verfügbar */
+#eopac-ecjajem
+.eopac-embedded--status-red {
+  background: #cf3838;
+}
+
+/* Weitere Statusfarben */
+#eopac-ecjajem
+.eopac-embedded--status-yellow {
+  background: #d99a22;
+}
+
+/* Link */
+#eopac-ecjajem
+.eopac-embedded--action {
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+#eopac-ecjajem
+.eopac-embedded--action:hover {
+  color: var(--accent-dark);
+}
+
+/* =========================================
+   Smartphone
+   ========================================= */
+
+@media (max-width: 560px) {
+  #eopac-ecjajem
+  .eopac-embedded-listing-element {
+    padding: 1rem 0;
+  }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element-cover {
+    width: 70px;
+    margin-right: 1rem;
+  }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element img {
+    max-width: 70px;
+  }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element h3 {
+    font-size: 1rem;
+  }
+
+  #eopac-ecjajem
+  .eopac-embedded-listing-element-content {
+    font-size: 0.9rem;
+  }
 }
