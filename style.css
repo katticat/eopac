@@ -99,3 +99,120 @@ h1 {
     font-size: 1rem;
   }
 }
+
+
+
+/* =====================================
+   Navigation der Medienlisten
+   ===================================== */
+
+.medien-navigation {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 2rem;
+  padding: 0 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.medien-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-width: 0;
+  min-height: 125px;
+  padding: 12px 8px;
+
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.medien-nav-item img {
+  display: block;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+/* Platzhalter für weitere Bilder */
+.medien-nav-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+/* Hover */
+.medien-nav-item:hover {
+  background: var(--soft);
+  border-color: #d8b98c;
+  color: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+/* Aktuell gewählte Liste */
+.medien-nav-item.active {
+  background: var(--soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+.medien-nav-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+  .medien-navigation {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Smartphone */
+@media (max-width: 480px) {
+  .medien-navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .medien-nav-item {
+    min-height: 110px;
+    padding: 10px 6px;
+  }
+
+  .medien-nav-item img,
+  .medien-nav-placeholder {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .medien-nav-item {
+    transition: none;
+  }
+}
