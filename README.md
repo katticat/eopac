@@ -5,10 +5,13 @@
 Kurzanleitung zur Anzeige der Öffnungszeiten aus dem **eOPAC** über **GitHub / Cloudflare Pages**.
 
 ```code
+[https](https://github.com/katticat/eopac/medien.html)
+[https](https://github.com/katticat/eopac/openning.html)
+[https](https://github.com/katticat/eopac/styles.css)
 
-https://eopac.pages.dev/medien.html?liste=spiele
-https://eopac.pages.dev/opening.html?tag=short
-https://eopac.pages.dev/opening.html?tag=utm
+[https](https://eopac.pages.dev/medien.html?liste=spiele)
+[https](https://eopac.pages.dev/opening.html?tag=short)
+[https](https://eopac.pages.dev/opening.html?tag=utm)
 ```
 ## Dateien und Adresse
 
