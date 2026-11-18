@@ -61,6 +61,10 @@
 
 <script>
 "use strict";
+"use strict";
+
+const params = new URLSearchParams(location.search);
+const tag = params.get("tag") || "";
 
 var ecjajeo;
 
@@ -79,6 +83,21 @@ var ecjajeo;
     styles: false,
     heading: "h3"
   };
+
+  if (tag==="short") {
+    const options = {
+    bibid: "BGX429094",
+    formHash: "ecjajeo",
+    async: true,
+    feature: "openings",
+    openings_table: false,
+    closings: false,
+    specialopenings: false,
+    styles: false,
+    heading: "h3"
+  };
+
+  }
 
   let done = false;
 
