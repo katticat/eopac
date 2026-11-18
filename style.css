@@ -483,7 +483,7 @@ body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
 /* document.body.classList.toggle("opening-short", tag === "short"); */
 /* Überschrift und Status ausblenden */
 body.opening-short
-#eopac-ecjajeo .eopac-embedded-openings > h3, .opening-status {
+#eopac-ecjajeo .eopac-embedded-openings > h3, .eopac-embedded-openingstatus {
   display: none;
 }
 
