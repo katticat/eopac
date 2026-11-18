@@ -484,7 +484,7 @@ body.opening-short
 #eopac-ecjajeo .eopac-embedded-openings > h3, .opening-status {
   display: none;
 }
-#eopac-ecjajeo .eopac-embedded-openings > body {
+.opening-short > body {
   color: #dedede;
   background-color: #354472;
 }
