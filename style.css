@@ -483,12 +483,11 @@ body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
 /* document.body.classList.toggle("opening-short", tag === "short"); */
 /* Überschrift und Status ausblenden */
 body.opening-short
-#eopac-ecjajeo .eopac-embedded-openings > h3 {
+#eopac-ecjajeo .eopac-embedded-openings > h3,
+body.opening-short .opening-status {
   display: none;
 }
-#eopac-ecjajeo .eopac-embedded-openingstatus > .openingstatus {
-  display: none;
-}
+
 /* Nur in der Kurzansicht */
 body.opening-short {
   color: #dedede;
