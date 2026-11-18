@@ -77,26 +77,13 @@ var ecjajeo;
     async: true,
     feature: "openings",
     openings_table: false,
-    closings: true,
-    specialopenings: true,
+    closings: tag !== "short",
+    specialopenings: tag !== "short",
     styles: false,
     heading: "h3"
-  };
+    };
 
-  if (tag==="short") {
-    const options = {
-    bibid: "BGX429094",
-    formHash: "ecjajeo",
-    async: true,
-    feature: "openings",
-    openings_table: false,
-    closings: false,
-    specialopenings: false,
-    styles: false,
-    heading: "h3"
-  };
-
-  
+}
 
   let done = false;
 
