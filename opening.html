@@ -1,0 +1,24 @@
+<div style="" id="eopac-ecjajeo"> Unsere <a href="http://www.eopac.net/BGX429094/openings/">Öffnungszeiten</a>. </div> 
+<script type="text/javascript">var ecjajeo;(function(d, t) {
+var s = d.createElement(t), options = {
+'bibid':'BGX429094', 
+'formHash': 'ecjajeo',
+'async':true,
+'feature':'openings',
+'openings_table':true,
+'closings':true,
+'specialopenings':true,
+'styles':false,
+'heading':'h3',
+};
+var done = false;
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.eopac.net/static/js/embed_inline-min.js';
+s.onload = s.onreadystatechange = function() {
+	if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+	    done = true;
+	    try { ecjajeo = new BVSeOPACinline();ecjajeo.initialize(options);ecjajeo.inject(); } catch (e) {}
+	};
+};
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');
+</script>
