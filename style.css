@@ -481,6 +481,10 @@ body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
 }
 
 body.opening-short
-#eopac-ecjajeo .eopac-embedded-openings > h3 {
+#eopac-ecjajeo .eopac-embedded-openings > h3, .opening-status {
   display: none;
+}
+#eopac-ecjajeo .eopac-embedded-openings > body {
+  color: #354472;
+  background-color: #dedede;
 }
