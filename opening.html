@@ -77,9 +77,9 @@ var ecjajeo;
     formHash: "ecjajeo",
     async: true,
     feature: "openings",
-    openings_table: false,
-    closings: true,
-    specialopenings: true,
+    openings_table: tag !== "short",
+    closings: tag !== "short",
+    specialopenings: tag !== "short",
     styles: false,
     heading: "h3"
   };
