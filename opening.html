@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,113 +9,167 @@
   <title>Öffnungszeiten – KÖB Obernau</title>
 
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap">
+        href="https://eopac.pages.dev/style.css?v=5">
 
-  <link rel="stylesheet" href="https://eopac.pages.dev/style.css?v=4">
-<style>
-/* Nur Zeitschriften: Covergalerie, unabhängig von externer style.css */
-#zeitschriften-ansicht[hidden] { display: none !important; }
-.zeitschriften-anzahl { margin: 0 0 1rem; color: #666; font-size: .96rem; }
-.zeitschriften-raster { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem 1.2rem; }
-.zeitschrift-kachel { min-width: 0; text-align: center; }
-.zeitschrift-kachel a { display: block; text-decoration: none; color: #7a431b; }
-.zeitschrift-cover { width: min(100%, 170px); aspect-ratio: 3 / 4; margin: 0 auto .6rem; border-radius: 3px; overflow: hidden; background: #f7f4ef; box-shadow: 0 3px 12px #00000018; display: flex; align-items: center; justify-content: center; }
-.zeitschrift-cover img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.zeitschrift-ersatz { width: 100%; height: 100%; padding: .6rem; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(145deg,#d8b98c,#f1e7dc); }
-.zeitschrift-ersatz b { display: block; font-size: .65rem; letter-spacing: .1em; color: #7a431b; }
-.zeitschrift-ersatz strong { font-size: 1.05rem; line-height: 1.2; color: #333; overflow-wrap: anywhere; }
-.zeitschrift-name { display: block; font-weight: 600; font-size: .95rem; line-height: 1.4; }
-.zeitschrift-coverhinweis { display:block; margin-top:.25rem; color:#666; font-size:.76rem; line-height:1.3; }
-.zeitschrift-heft { display: block; font-size: .8rem; color: #666; margin-top: .2rem; }
-.zeitschrift-kachel a:hover .zeitschrift-name { text-decoration: underline; }
-.zeitschrift-kachel a:focus-visible { outline: 2px solid #7a431b; outline-offset: 4px; }
-body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
-@media (max-width: 760px) { .zeitschriften-raster { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; } }
-@media (max-width: 500px) { .zeitschriften-raster { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-</style>
+  <style>
+    /* Öffnungszeiten */
+    #eopac-ecjajeo {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    #eopac-ecjajeo h3 {
+      color: #7a431b;
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    /* Öffnungsstatus */
+    .opening-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .opening-status-dot {
+      display: inline-block;
+      flex: 0 0 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #999999;
+    }
+
+    .opening-status-dot.open {
+      background: #299447;
+    }
+
+    .opening-status-dot.closed {
+      background: #cf3838;
+    }
+  </style>
 </head>
 
 <body>
 <main>
-<div style="" id="eopac-ecjajeo"> Unsere <a href="http://www.eopac.net/BGX429094/openings/">Öffnungszeiten</a>. </div> 
-<script type="text/javascript"
-var ecjajeo;(function(d, t) {
-var s = d.createElement(t), 
-    options = {
-        'bibid':'BGX429094', 
-        'formHash': 'ecjajeo',
-        'async':true,
-        'feature':'openings',
-        'openings_table':false,
-        'closings':true,
-        'specialopenings':true,
-        'styles':false,
-        'heading':'h3',
-    };
-var done = false;
-s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.eopac.net/static/js/embed_inline-min.js';
-s.onload = s.onreadystatechange = function() {
-	if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-	    done = true;
-	    try { ecjajeo = new BVSeOPACinline();ecjajeo.initialize(options);ecjajeo.inject(); } catch (e) {}
-	};
-};
-var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
-})(document, 'script');
-(function () {
+
+  <div id="eopac-ecjajeo">
+    Öffnungszeiten werden geladen …
+  </div>
+
+</main>
+
+<script>
+"use strict";
+
+var ecjajeo;
+
+/* eOPAC-Öffnungszeiten laden */
+(function(d, t) {
+  const s = d.createElement(t);
+
+  const options = {
+    bibid: "BGX429094",
+    formHash: "ecjajeo",
+    async: true,
+    feature: "openings",
+    openings_table: false,
+    closings: true,
+    specialopenings: true,
+    styles: false,
+    heading: "h3"
+  };
+
+  let done = false;
+
+  s.src =
+    "https://www.eopac.net/static/js/embed_inline-min.js";
+
+  s.onload = s.onreadystatechange = function() {
+    if (!done &&
+        (!this.readyState ||
+         this.readyState === "loaded" ||
+         this.readyState === "complete")) {
+
+      done = true;
+
+      try {
+        ecjajeo = new BVSeOPACinline();
+        ecjajeo.initialize(options);
+        ecjajeo.inject();
+      } catch (error) {
+        console.error("eOPAC-Fehler:", error);
+      }
+    }
+  };
+
+  s.onerror = function() {
+    console.error("eOPAC-Skript konnte nicht geladen werden.");
+  };
+
+  d.head.appendChild(s);
+
+})(document, "script");
+
+
+/* ======================================
+   Ampel für Öffnungsstatus
+   ====================================== */
+
+(function() {
+  const container =
+    document.getElementById("eopac-ecjajeo");
+
   function aktualisiereAmpel() {
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT
-    );
+    // Nur den Öffnungszeitenbereich durchsuchen
+    const elemente = container.querySelectorAll("*");
 
-    let node;
+    for (const el of elemente) {
+      if (el.classList.contains("opening-status")) {
+        continue;
+      }
 
-    while ((node = walker.nextNode())) {
-      const text = node.textContent.trim();
+      // Nur Elemente mit eigenem Text prüfen
+      const text = [...el.childNodes]
+        .filter(node => node.nodeType === Node.TEXT_NODE)
+        .map(node => node.textContent)
+        .join(" ")
+        .trim();
 
       const match = text.match(
-        /Wir haben aktuell (geöffnet|geschlossen)/i
+        /Wir haben aktuell\s+(geöffnet|geschlossen)/i
       );
 
       if (!match) continue;
 
-      const el = node.parentElement;
-
-      if (!el || el.classList.contains(
-        "opening-status"
-      )) continue;
-
-      el.classList.add("opening-status");
-
       const dot = document.createElement("span");
       dot.className = "opening-status-dot";
 
-      const offen =
-        match[1].toLowerCase() === "geöffnet";
+      const offen = match[1].toLowerCase() === "geöffnet";
 
       dot.classList.add(
         offen ? "open" : "closed"
       );
 
       dot.setAttribute("aria-hidden", "true");
-      el.insertBefore(dot, node);
+
+      el.classList.add("opening-status");
+      el.prepend(dot);
     }
   }
 
-  // Auch nach dem asynchronen Laden prüfen
   const observer = new MutationObserver(
     aktualisiereAmpel
   );
 
-  observer.observe(document.body, {
+  observer.observe(container, {
     childList: true,
-    subtree: true,
-    characterData: true
+    subtree: true
   });
 
   aktualisiereAmpel();
 })();
 </script>
+
 </body>
 </html>
