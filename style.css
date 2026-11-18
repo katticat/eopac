@@ -479,3 +479,8 @@ body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
 .opening-status-dot.closed {
   background: #cf3838;
 }
+
+body.opening-short
+#eopac-ecjajeo .eopac-embedded-openings > h3 {
+  display: none;
+}

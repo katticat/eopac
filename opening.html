@@ -83,7 +83,9 @@ var ecjajeo;
     styles: false,
     heading: "h3"
   };
-
+  
+  document.body.classList.toggle("opening-short", tag === "short");
+  
   let done = false;
 
   s.src =
@@ -173,6 +175,8 @@ var ecjajeo;
 
   aktualisiereAmpel();
 })();
+
+
 </script>
 
 </body>
