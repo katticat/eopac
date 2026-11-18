@@ -480,11 +480,15 @@ body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
   background: #cf3838;
 }
 
+/* document.body.classList.toggle("opening-short", tag === "short"); */
+/* Überschrift und Status ausblenden */
 body.opening-short
 #eopac-ecjajeo .eopac-embedded-openings > h3, .opening-status {
   display: none;
 }
-.opening-short > body {
+
+/* Nur in der Kurzansicht */
+body.opening-short {
   color: #dedede;
   background-color: #354472;
 }
