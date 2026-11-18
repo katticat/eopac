@@ -37,18 +37,20 @@ body.ist-zeitschriften #eopac-ecjajem { display: none !important; }
 <body>
 <main>
 <div style="" id="eopac-ecjajeo"> Unsere <a href="http://www.eopac.net/BGX429094/openings/">Öffnungszeiten</a>. </div> 
-<script type="text/javascript">var ecjajeo;(function(d, t) {
-var s = d.createElement(t), options = {
-'bibid':'BGX429094', 
-'formHash': 'ecjajeo',
-'async':true,
-'feature':'openings',
-'openings_table':false,
-'closings':true,
-'specialopenings':true,
-'styles':false,
-'heading':'h3',
-};
+<script type="text/javascript"
+var ecjajeo;(function(d, t) {
+var s = d.createElement(t), 
+    options = {
+        'bibid':'BGX429094', 
+        'formHash': 'ecjajeo',
+        'async':true,
+        'feature':'openings',
+        'openings_table':false,
+        'closings':true,
+        'specialopenings':true,
+        'styles':false,
+        'heading':'h3',
+    };
 var done = false;
 s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.eopac.net/static/js/embed_inline-min.js';
 s.onload = s.onreadystatechange = function() {
@@ -59,6 +61,60 @@ s.onload = s.onreadystatechange = function() {
 };
 var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
 })(document, 'script');
+(function () {
+  function aktualisiereAmpel() {
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT
+    );
+
+    let node;
+
+    while ((node = walker.nextNode())) {
+      const text = node.textContent.trim();
+
+      const match = text.match(
+        /Wir haben aktuell (geöffnet|geschlossen)/i
+      );
+
+      if (!match) continue;
+
+      const el = node.parentElement;
+
+      if (!el || el.classList.contains(
+        "opening-status"
+      )) continue;
+
+      el.classList.add("opening-status");
+
+      const dot = document.createElement("span");
+      dot.className = "opening-status-dot";
+
+      const offen =
+        match[1].toLowerCase() === "geöffnet";
+
+      dot.classList.add(
+        offen ? "open" : "closed"
+      );
+
+      dot.setAttribute("aria-hidden", "true");
+      el.insertBefore(dot, node);
+    }
+  }
+
+  // Auch nach dem asynchronen Laden prüfen
+  const observer = new MutationObserver(
+    aktualisiereAmpel
+  );
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  aktualisiereAmpel();
+})();
 </script>
 </body>
 </html>
