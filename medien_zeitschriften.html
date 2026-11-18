@@ -124,6 +124,28 @@ function leseHeft(titel) {
   return { name: name || titel.trim(), jahr, nummer };
 }
 
+function findeCover(ausgaben) {
+  // Erwartet Ausgaben, sortiert von neu nach alt.
+  for (const ausgabe of ausgaben) {
+    const bild = ausgabe.querySelector(
+      ".eopac-embedded--cover img"
+    );
+
+    if (bild) {
+      const src = bild.getAttribute("src");
+
+      if (src) {
+        return {
+          src: bild.currentSrc || bild.src,
+          ausgabe: ausgabe
+        };
+      }
+    }
+  }
+
+  return null;
+}
+
 function lesen(element) {
   const a = element.querySelector(".eopac-embedded-listing-element-title a") || element.querySelector("h3 a");
   if (!a) return null;
