@@ -499,3 +499,107 @@ body.opening-short
   color: #dedede;
   font-size: smaller;
 }
+
+
+/* ==================================
+   Mediennavigation als Slider
+   ================================== */
+
+.medien-slider {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Vier Icons nebeneinander */
+.medien-slider .medien-navigation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Ausgeblendete Icons */
+.medien-slider .medien-nav-item[hidden] {
+  display: none !important;
+}
+
+/* Pfeile */
+.medien-slider-prev,
+.medien-slider-next {
+  width: 32px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--accent);
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.medien-slider-prev:hover:not(:disabled),
+.medien-slider-next:hover:not(:disabled) {
+  background: var(--soft);
+  border-color: var(--accent);
+}
+
+.medien-slider-prev:disabled,
+.medien-slider-next:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* Seitenpunkte */
+.medien-slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.medien-slider-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #d8d8d8;
+  cursor: pointer;
+}
+
+.medien-slider-dot.active {
+  background: var(--accent);
+}
+
+.medien-slider button:focus-visible,
+.medien-slider-dots button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Smartphone: zwei Icons */
+@media (max-width: 560px) {
+  .medien-slider {
+    grid-template-columns: 26px minmax(0, 1fr) 26px;
+    gap: 6px;
+  }
+
+  .medien-slider .medien-navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .medien-slider-prev,
+  .medien-slider-next {
+    width: 26px;
+    height: 38px;
+    font-size: 23px;
+  }
+}
